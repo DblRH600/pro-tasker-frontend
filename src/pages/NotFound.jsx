@@ -9,15 +9,15 @@ function NotFoundPage() {
         The page you are trying to access has either moved or no longer exist.
       </p>
 
-      <img 
+      {/* <img 
       className="justify-self-center"
       src="https://media1.giphy.com/media/l1Et89dcKnVN1zdpC/giphy.gif" 
-      alt="Not-able GIFs - Get the best GIF on GIPHY" />
+      alt="Not-able GIFs - Get the best GIF on GIPHY" /> */}
 
-      {/* <img 
+      <img 
       className="justify-self-center w-full h-75%"
       src="https://gifdb.com/images/thumbnail/cute-anime-chika-fujiwara-angry-3ff1u4fuj4xin91r.gif" 
-      alt="Cute Anime GIFs | GIFDB.com" /> */}
+      alt="Cute Anime GIFs | GIFDB.com" />
     </div>
   );
 }

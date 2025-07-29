@@ -1,31 +1,36 @@
 import "./App.css";
-import { useState } from 'react';
+import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import NotFoundPage from './pages/NotFoundPage';
-import HomePage from "./pages/HomePage";
-import RegistrationPage from "./pages/RegistrationPage"
-import AdminDashboardPage from "./pages/AdminDashboardPage";
-import UserDashboardPage from "./pages/UserDashboardPage";
-import UserProfilePage from "./pages/UserProfilePage"
+import NotFoundPage from "./pages/NotFound";
+import HomePage from "./pages/Home";
+import RegistrationPage from "./pages/Registration";
+import AdminDashboardPage from "./pages/AdminDashboard";
+import UserDashboardPage from "./pages/UserDashboard";
+import UserProfilePage from "./pages/UserProfile";
+import ProjectPage from "./pages/Project";
+import AboutPage from "./pages/About";
+
 
 function App() {
   // const [count, setCount] = useState(0)
 
   return (
-  <>
-  
-  <Routes>
-    <Route path="" element={<HomePage />} />
-    <Route path="" element={<RegistrationPage />} />
-    {/* Nice to Have */}
-    <Route path="" element={<AdminDashboardPage />} />
-    <Route path="" element={<UserDashboardPage />} />
-    {/* Nice to Have */}
-    <Route path="" element={<UserProfilePage />} />
-    <Route path="*" element={<NotFoundPage />} />
-  </Routes>
-  
-  </>
+    <>
+      
+
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/register" element={<RegistrationPage />} />
+        {/* Nice to Have */}
+        <Route path="/dashboard" element={<AdminDashboardPage />} />
+        <Route path="/landing" element={<UserDashboardPage />} />
+        <Route path="/project" element={<ProjectPage />} />
+        {/* Nice to Have */}
+        <Route path="/profile" element={<UserProfilePage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </>
   );
 }
 

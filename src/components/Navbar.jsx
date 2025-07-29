@@ -7,7 +7,7 @@ function NavBar () {
         <nav className="flex gap-5 mx-auto">
             <NavLink to="/">Home</NavLink>
             <NavLink to="/about">About</NavLink>
-            <NavLink to="/register">Login | Create</NavLink>
+            <NavLink to="/signin">Login</NavLink>
             {/* <NavLink to=""></NavLink> */}
         </nav>
     )

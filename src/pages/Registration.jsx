@@ -27,7 +27,7 @@ function RegistrationPage() {
 
       localStorage.setItem("pt-token", JSON.stringify(res.data.token));
 
-      navigate("/feed");
+      navigate("/landing");
     } catch (error) {
       console.log(error);
     }

@@ -9,6 +9,7 @@ import UserDashboardPage from "./pages/UserDashboard";
 import UserProfilePage from "./pages/UserProfile";
 import ProjectPage from "./pages/Project";
 import AboutPage from "./pages/About";
+import SignInPage from "./pages/SignIn";
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/signin" element={<SignInPage />} />
         <Route path="/register" element={<RegistrationPage />} />
         {/* Nice to Have */}
         <Route path="/dashboard" element={<AdminDashboardPage />} />

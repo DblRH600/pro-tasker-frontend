@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { backendClient } from "../client/backendClient";
 import { useNavigate } from "react-router-dom";
+import HomeButton from "../components/HomeButton";
 
 function SignInPage() {
   const navigate = useNavigate();
@@ -9,6 +10,7 @@ function SignInPage() {
     email: "",
     password: "",
   });
+  const [errortext, setErrorText] = useState("");
 
   const handleChange = (e) => {
     setFormData({
@@ -18,7 +20,8 @@ function SignInPage() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // prevent default functional behavior
+    setErrorText(""); // clear previous error; if any
 
     try {
       const res = await backendClient.post("/users/login", formData);
@@ -33,23 +36,25 @@ function SignInPage() {
       //   check for error response that user info does not exist
       const message = error?.response?.data.error || "";
 
-      if (message === "user not found") {
+      if (message === "Cannot find User") {
         navigate("/register");
       } else {
-        alert("Login Failed. Please try again.");
+        setErrorText("Login Failed. Please try again.");
       }
     }
   };
 
   return (
     <main>
-      <h1>Sign In Page</h1>
+      <HomeButton />
+      <h1>LogIn</h1>
+
+      {errortext && <p>{errortext}</p>}
 
       <form
         className="flex flex-col my-3 gap-2 items-center"
         onSubmit={handleSubmit}
       >
-        <h2>Sign In</h2>
         <label htmlFor="email" />
         <input
           type="email"
@@ -67,12 +72,17 @@ function SignInPage() {
           onChange={handleChange}
         />
 
-        <input type="submit" value="Log In" />
+        <input type="submit" value="LogIn" />
       </form>
 
       <p>
-        Do not have an account?{" "}
-        <button onClick={() => navigate("/register")}>Create Account</button>
+        Don't have an account?{" "}
+        <button
+          onClick={() => navigate("/register")}
+          style={{ background: "none" }}
+        >
+          Create Account
+        </button>
       </p>
     </main>
   );

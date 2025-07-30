@@ -10,6 +10,7 @@ import UserProfilePage from "./pages/UserProfile";
 import ProjectPage from "./pages/Project";
 import AboutPage from "./pages/About";
 import SignInPage from "./pages/SignIn";
+import Footer from "./components/Footer";
 
 
 function App() {
@@ -27,11 +28,13 @@ function App() {
         {/* Nice to Have */}
         <Route path="/dashboard" element={<AdminDashboardPage />} />
         <Route path="/landing" element={<UserDashboardPage />} />
-        <Route path="/project" element={<ProjectPage />} />
+        <Route path="/projects" element={<ProjectPage />} />
         {/* Nice to Have */}
         <Route path="/profile" element={<UserProfilePage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+
+      <Footer />
     </>
   );
 }

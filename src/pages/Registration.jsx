@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { backendClient } from "../client/backendClient";
 import { useNavigate } from "react-router-dom";
+import HomeButton from "../components/HomeButton";
 
 function RegistrationPage() {
   const navigate = useNavigate();
@@ -34,13 +35,14 @@ function RegistrationPage() {
   };
   return (
     <main>
+      <HomeButton />
       <h1>Create Account</h1>
 
       <form
         className="flex flex-col my-3 gap-2 items-center"
         onSubmit={handleSubmit}
       >
-        <h2>Please fill out the following</h2>
+        <h2>Please fill out the form below to create an account</h2>
         <label htmlFor="username" />
         <input
           type="text"
@@ -68,6 +70,16 @@ function RegistrationPage() {
 
         <input type="submit" value="Create Account" />
       </form>
+
+      <p>
+        Already have an account?{" "}
+        <button
+          onClick={() => navigate("/signin")}
+          style={{ background: "none" }}
+        >
+          LogIn
+        </button>
+      </p>
     </main>
   );
 }

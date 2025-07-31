@@ -2,9 +2,10 @@
 import { useState, useEffect } from "react";
 import { backendClient } from "../client/backendClient";
 import { useNavigate } from "react-router-dom";
-import HomeButton from "../components/HomeButton";
+// import HomeButton from "../components/HomeButton";
 
 function RegistrationPage() {
+  // state inputs for navigation & login/create acc functions
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
@@ -12,6 +13,7 @@ function RegistrationPage() {
     password: "",
   });
 
+  // ensures controlled component behavior while updating form data
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -19,15 +21,19 @@ function RegistrationPage() {
     });
   };
 
+  // handles form submission
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // prevent default browser behavior
 
     try {
+      // sends form data to register/create account
       const res = await backendClient.post("/users/register", formData);
       console.log(res.data);
 
+      // store token on client side for authentication
       localStorage.setItem("pt-token", JSON.stringify(res.data.token));
 
+      // route to 'User Dashboard' upon successful account creation
       navigate("/landing");
     } catch (error) {
       console.log(error);
@@ -35,7 +41,7 @@ function RegistrationPage() {
   };
   return (
     <main>
-      <HomeButton />
+      {/* <HomeButton /> */}
       <h1>Create Account</h1>
 
       <form
@@ -44,6 +50,7 @@ function RegistrationPage() {
       >
         <h2>Please fill out the form below to create an account</h2>
         <label htmlFor="username" />
+        {/* controlled data input that maps formData */}
         <input
           type="text"
           name="username"
@@ -71,6 +78,7 @@ function RegistrationPage() {
         <input type="submit" value="Create Account" />
       </form>
 
+      {/* custom button to redirect to sign in page from create account page */}
       <p>
         Already have an account?{" "}
         <button

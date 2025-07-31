@@ -4,7 +4,6 @@ import NavBar from "../components/Navbar";
 function HomePage() {
   return (
     <>
-    <NavBar />
       <h1>Welcome to ProTasker</h1>
       
 

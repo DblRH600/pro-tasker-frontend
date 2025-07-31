@@ -2,16 +2,22 @@
 import { useState, useEffect } from "react";
 import { backendClient } from "../client/backendClient";
 import { useNavigate } from "react-router-dom";
-import HomeButton from "../components/HomeButton";
+import { useUser } from "../context/UserContext";
+// import HomeButton from "../components/HomeButton";
 
 function SignInPage() {
+  // state inputs for navigation & login/create acc functions
   const navigate = useNavigate();
+  const { setCurrentUser } = useUser();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
   const [errortext, setErrorText] = useState("");
 
+  useEffect(() => {}, []);
+
+  // ensures controlled component bahavior while updating form data
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -24,16 +30,23 @@ function SignInPage() {
     setErrorText(""); // clear previous error; if any
 
     try {
+      // sends form data to login
       const res = await backendClient.post("/users/login", formData);
       console.log(res.data);
 
+      // store token on client side for authentication
       localStorage.setItem("pt-token", JSON.stringify(res.data.token));
 
+      // store user object to enable session management
+      setCurrentUser(res.data.user);
+
+      // route to 'User Dashboard' upon successful login
       navigate("/landing");
     } catch (error) {
       console.log(error);
 
-      //   check for error response that user info does not exist
+      //  check for error response that user info does not exist
+      // optional chaining to safely access nested data
       const message = error?.response?.data.error || "";
 
       if (message === "Cannot find User") {
@@ -46,7 +59,7 @@ function SignInPage() {
 
   return (
     <main>
-      <HomeButton />
+      {/* <HomeButton /> */}
       <h1>LogIn</h1>
 
       {errortext && <p>{errortext}</p>}
@@ -56,6 +69,7 @@ function SignInPage() {
         onSubmit={handleSubmit}
       >
         <label htmlFor="email" />
+        {/* controlled data input */}
         <input
           type="email"
           name="email"
@@ -75,6 +89,7 @@ function SignInPage() {
         <input type="submit" value="LogIn" />
       </form>
 
+      {/* custom button to redirect to create account page if no account exists */}
       <p>
         Don't have an account?{" "}
         <button

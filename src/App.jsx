@@ -11,15 +11,16 @@ import ProjectPage from "./pages/Project";
 import AboutPage from "./pages/About";
 import SignInPage from "./pages/SignIn";
 import Footer from "./components/Footer";
-
+import NavBar from "./components/Navbar";
 
 function App() {
   // const [count, setCount] = useState(0)
 
   return (
     <>
-      
+      <NavBar />
 
+      {/* routing logic */}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />

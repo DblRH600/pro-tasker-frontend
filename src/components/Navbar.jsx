@@ -21,9 +21,9 @@ function NavBar() {
           <NavLink to="/landing">User Dashboard</NavLink>
           <NavLink to="/">Home</NavLink>
           <NavLink to="/projects">Projects</NavLink>
-          <NavLink to="/tasks">Tasks</NavLink>
+          {/* <NavLink to="/tasks">Tasks</NavLink> */}
           <NavLink to="/about">About</NavLink>
-          <NavLink to="/profile">
+          <NavLink to="*">
             <i className="ri-settings-5-line"></i>
           </NavLink>
           <button

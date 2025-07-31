@@ -11,13 +11,13 @@ function NotFoundPage() {
 
       {/* <img 
       className="justify-self-center"
-      src="https://media1.giphy.com/media/l1Et89dcKnVN1zdpC/giphy.gif" 
-      alt="Not-able GIFs - Get the best GIF on GIPHY" /> */}
+      src="https://media1.tenor.com/m/v5J1g-LvD4kAAAAC/cyclops-x-men-cyclops.gif" 
+      alt="Cyclops X-men Krakoa GIF - Cyclops x-men Cyclops Krakoa - Discover ..." /> */}
 
       <img 
       className="justify-self-center w-full h-75%"
-      src="https://gifdb.com/images/thumbnail/cute-anime-chika-fujiwara-angry-3ff1u4fuj4xin91r.gif" 
-      alt="Cute Anime GIFs | GIFDB.com" />
+      src="https://th.bing.com/th/id/R.a6601d77ae74715e7ca6106f49a7134b?rik=mdTfI%2bybBYR3Vw&riu=http%3a%2f%2fwww.fightersgeneration.com%2fcharacters%2fcyc-opticblast-air.gif&ehk=osAdFYKWz%2bo15K451ScqU4Z2BNxTLXQM8YW%2fDxWkh7I%3d&risl=&pid=ImgRaw&r=0" 
+      alt="Cyclops Gif Animations" />
     </div>
   );
 }

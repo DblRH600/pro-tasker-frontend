@@ -15,15 +15,37 @@ export const UserProvider = ({ children }) => {
 
   // check for stored token in order to fetch current user data
   useEffect(() => {
+    // retrieve token from localstorage
+    const token = JSON.parse(localStorage.getItem("pt-token"));
+    console.log(token, "from userContext");
+
+    // skip fetch if no token is found
+    if (token) {
+      backendClient
+        .get("/projects", {
+          headers: {
+            Authorization: `Bearer ${JSON.parse(
+              localStorage.getItem("pt-token")
+            )}`,
+          },
+        })
+        .then((res) => {
+          setCurrentUser(res.data);
+        });
+    }
+
     const fetchUser = async () => {
       // retrieve token from localstorage
       const token = JSON.parse(localStorage.getItem("pt-token"));
       console.log(token, "from userContext");
 
       // skip fetch if no token is found
-      if (!token) {
-        setLoading(false);
-        return;
+      if (token) {
+        backendClient.get("/projects", {
+            headers: {
+                Authorization: `Bearer ${JSON.parse(localStorage.getItem("pt-token"))}`,
+            }
+        }).then((res) => {setCurrentUser(res.data)})
       }
 
       // try / catch block to safely handle fetch request

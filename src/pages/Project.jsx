@@ -1,4 +1,4 @@
-// this page is used to create projects and tasks
+// this page is used to create and diplay projects and associated tasks
 import { useState, useEffect } from "react";
 import { backendClient } from "../client/backendClient";
 import InviteButton from "../components/InviteButton";
@@ -49,9 +49,9 @@ function ProjectPage() {
   }, []);
 
   // redirects to task page when button is clicked to add task to proj
-  const handleAddTask = (projectId) => {
+  const handleTask = (task, projectId) => {
     console.log("Add a task to project", projectId);
-    navigate("/tasks");
+    navigate("/tasks", { state: { taskId: task._id, projectId: projectId } });
   };
 
   // handle edit button clicks and proj data updates
@@ -110,7 +110,7 @@ function ProjectPage() {
         setEditProj(false);
         setEditProjId(null);
       } else {
-        // if create mode, send post request to add state values to backend and create project 
+        // if create mode, send post request to add state values to backend and create project
         const res = await backendClient.post(
           "/projects",
           {
@@ -197,6 +197,7 @@ function ProjectPage() {
             value={editProj ? "Update Project" : "Create Project"}
           />
         </form>
+        <hr />
 
         <div className="proj-display">
           {/* Array.isArray used to validate proj arrays before it can render */}
@@ -218,14 +219,6 @@ function ProjectPage() {
                     )}
                   </div>
                   <div>
-                    {/* triggers handleProjEdit logic: change proj in & out of edit mode */}
-                    <button
-                      onClick={() => handleProjEdit(proj)}
-                      style={{ background: "none" }}
-                    >
-                      <i class="ri-pencil-ruler-2-line"></i>
-                      {editProj && editProjId === proj._id ? "Cancel" : "Edit"}
-                    </button>
                     {/* display detail proj info */}
                     {proj.projectDueDate && (
                       <p>
@@ -249,17 +242,50 @@ function ProjectPage() {
                     </p>
                   )}
                   <div>
+                    {/* triggers handleProjEdit logic: change proj in & out of edit mode */}
+                    <button
+                      onClick={() => handleProjEdit(proj)}
+                      style={{ background: "none" }}
+                    >
+                      <i className="ri-pencil-ruler-2-line"></i>
+                      {editProj && editProjId === proj._id ? "Cancel" : "Edit"}
+                    </button>
                     {/* triggers navigation over to task page to create tasks */}
                     <button
                       style={{ background: "none" }}
-                      onClick={() => handleAddTask(proj._id)}
+                      onClick={() => handleTask(proj._id)}
                     >
                       <i className="ri-function-add-fill pr-1"></i>
                       Add Task
                     </button>
+                  </div>
+
+                  <div>
+                    {/* checks for task array w/ optional chaining to minimize runtime errors  */}
                     {proj.tasks?.length > 0 && (
                       <div>
-                        <strong>Tasks:</strong> {proj.tasks.length}
+                        <h4>Tasks:</h4>
+                        <ul>
+                          {/* map (iterate) over each array & return each task array*/}
+                          {proj.tasks.map((task) => (
+                            <li
+                              key={task._id}
+                              onClick={() => handleTask(task, proj._id)}
+                            >
+                              <strong>{task.title}</strong> - {task.status}
+                              {task.taskDueDate && (
+                                <>
+                                  {" "}
+                                  (Due:{" "}
+                                  {new Date(
+                                    task.taskDueDate
+                                  ).toLocaleDateString()}
+                                  )
+                                </>
+                              )}
+                            </li>
+                          ))}
+                        </ul>
                       </div>
                     )}
                   </div>

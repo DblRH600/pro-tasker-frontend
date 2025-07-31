@@ -12,6 +12,7 @@ import AboutPage from "./pages/About";
 import SignInPage from "./pages/SignIn";
 import Footer from "./components/Footer";
 import NavBar from "./components/Navbar";
+import TaskPage from "./pages/Task";
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -30,6 +31,7 @@ function App() {
         <Route path="/dashboard" element={<AdminDashboardPage />} />
         <Route path="/landing" element={<UserDashboardPage />} />
         <Route path="/projects" element={<ProjectPage />} />
+        <Route path="/tasks" element={<TaskPage />} />
         {/* Nice to Have */}
         <Route path="/profile" element={<UserProfilePage />} />
         <Route path="*" element={<NotFoundPage />} />

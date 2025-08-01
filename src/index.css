@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 /* applies for all elements initial styling */
-*{
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }
 
 body {
@@ -15,6 +15,15 @@ body {
   justify-content: center;
   align-items: center;
   background-color: rgba(237, 244, 247, 0.804);
+}
+
+input {
+  width: 100%;
+  padding: 9px 15px;
+  margin: 8px 0;
+  border: 2px solid #444;
+  border-radius: 5px;
+  background-color: #fff;
 }
 
 /* navbar styling */
@@ -59,7 +68,7 @@ body {
   padding: 10px;
   border-radius: 18px;
 }
-.home-page-header{
+.home-page-header {
   box-shadow: 0 5px 8px #444;
 }
 .home-text-container {
@@ -72,11 +81,58 @@ body {
   font-size: 1.5rem;
 }
 
+/* log in & create account styling */
+.signin-container {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 2rem 5rem 1rem;
+  padding: 4rem;
+  border: 1px solid #777;
+  border-radius: 18px;
+  box-shadow: 0 0 16px #333;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(222, 7, 7, 0.562);
+}
+.signin-header {
+  margin-bottom: 1rem;
+  margin-top: -2rem;
+  font-size: 3.5rem;
+}
+.signin-form {
+  border: 0.5px solid #777;
+  border-radius: 7px;
+  padding: 2rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 0 8px #333;
+  background-color: rgba(237, 244, 247, 0.896);
+}
+.signin-err {
+  font-weight: semibold;
+  color: red;
+  font-style: italic;
+}
+.signin-quest {
+  font-size: 1rem;
+  font-weight: bold;
+}
+.signin-create-btn:hover {
+  cursor: pointer;
+  color: rgb(27, 24, 162);
+}
+#login-btn:hover {
+  background-color: rgba(26, 24, 162, 0.788);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
 
-
+/* footer styling */
 .footer {
   display: flex;
   justify-content: center;
-  font-size: .75rem;
-  margin-bottom: .5rem;
+  font-size: 0.75rem;
+  margin-bottom: 0.5rem;
 }
+
+/* media queries */

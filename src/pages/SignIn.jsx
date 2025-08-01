@@ -59,16 +59,15 @@ function SignInPage() {
   };
 
   return (
-    <main>
+    <main className="signin-container">
       {/* <HomeButton /> */}
-      <h1>LogIn</h1>
-
-      {errortext && <p>{errortext}</p>}
+      <h1 className="signin-header">LogIn</h1>
 
       <form
-        className="flex flex-col my-3 gap-2 items-center"
+        className="signin-form flex flex-col my-3 gap-2 items-center"
         onSubmit={handleSubmit}
       >
+        {errortext && <p className="signin-err">{errortext}</p>}
         <label htmlFor="email" />
         {/* controlled data input */}
         <input
@@ -87,13 +86,14 @@ function SignInPage() {
           onChange={handleChange}
         />
 
-        <input type="submit" value="LogIn" />
+        <input type="submit" value="LogIn" id="login-btn" />
       </form>
 
       {/* custom button to redirect to create account page if no account exists */}
-      <p>
+      <p className="signin-quest">
         Don't have an account?{" "}
         <button
+          className="signin-create-btn"
           onClick={() => navigate("/register")}
           style={{ background: "none" }}
         >

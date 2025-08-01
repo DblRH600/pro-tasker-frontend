@@ -146,6 +146,7 @@ function TaskPage() {
 
         // add new task array to rendered list for display
         setTasks((prev) => [...prev, res.data]);
+        navigate("/projects");
       }
 
       // clear form after successful submission
@@ -161,8 +162,8 @@ function TaskPage() {
   return (
     <>
       <div className="task-container">
-        <div className="task-header">
-          <h1>Tasks Details</h1>
+        <div className="task-header-container">
+          <h1 className="task-header">Tasks Details</h1>
         </div>
 
         <form
@@ -178,19 +179,21 @@ function TaskPage() {
             onChange={(e) => setTitle(e.target.value)}
           />
           <label htmlFor="description" />
-          <input
+          <textarea
+            className="text-des"
             type="text"
             name="description"
             value={description}
             placeholder="Task Description"
             onChange={(e) => setDescription(e.target.value)}
           />
-          <div>
+          <div className="text-stats">
             <label htmlFor="status" />
             <select
               name="status"
               value={taskStatus}
               onChange={(e) => setTaskStatus(e.target.value)}
+              className="text-sel"
             >
               <option value="To Do">To Do</option>
               <option value="In Progress">In Progress</option>
@@ -198,22 +201,21 @@ function TaskPage() {
             </select>
             <label htmlFor="dueDate" />
             <input
+              id="text-date"
               type="date"
               name="dueDate"
               value={taskDueDate}
               onChange={(e) => setTaskDueDate(e.target.value)}
             />
-          </div>
-
-          <div>
             <input
               type="submit"
               value={editTask ? "Update Task" : "Create Task"}
+              id="task-edit-btn"
             />
             <button
               type="button"
               onClick={() => navigate("/projects")}
-              className="cancel-btn"
+              id="cancel-btn"
               style={{ background: "none" }}
             >
               Cancel
@@ -222,24 +224,23 @@ function TaskPage() {
         </form>
         <hr />
 
-        <div className="task-display">
+        <div className="task-display-container">
+          <div className="task-display-header">
+            <h2>Tasks</h2>
+          </div>
           {/* Array.isArray used to validate task arrays before it can render */}
           {Array.isArray(tasks) && tasks.length > 0 ? (
-            <>
-              <h2>Tasks</h2>
+            <div className="task-display">
               {/* iterate over each task in tasks */}
               {tasks.map((task) => (
-                <div key={task._id}>
-                  <div>
-                    <h3>{task.title}</h3>
-                    <p>{task.description}</p>
-                    {/* display readable date in easy to read format if date exists */}
-                    {task.createdAt && (
-                      <p>
-                        <strong>Created:</strong>{" "}
-                        {new Date(task.createdAt).toLocaleDateString()}
-                      </p>
-                    )}
+                <div key={task._id} className="task-display-card" id="task-display-card">
+                  <div className="task-card-main">
+                    <div className="task-display-des">
+                      <h3>{task.title}</h3>
+                      <p>{task.description}</p>
+                    </div>
+
+                    
                   </div>
 
                   <div>
@@ -247,6 +248,7 @@ function TaskPage() {
                     <button
                       onClick={() => handleTaskEdit(task)}
                       style={{ background: "none" }}
+                      id="edit-task-btn"
                     >
                       <i class="ri-pencil-ruler-2-line"></i>
                       {editTask && editTaskId === task._id ? "Cancel" : "Edit"}
@@ -258,11 +260,19 @@ function TaskPage() {
                         color: "red",
                         marginLeft: "1rem",
                       }}
+                      id="task-delete-btn"
                     >
                       <i className="ri-delete-bin-6-line"></i>
                       Delete
                     </button>
                     {/* display detail task info */}
+                    {/* display readable date in easy to read format if date exists */}
+                    {task.createdAt && (
+                      <p>
+                        <strong>Created:</strong>{" "}
+                        {new Date(task.createdAt).toLocaleDateString()}
+                      </p>
+                    )}
                     {task.taskDueDate && (
                       <p>
                         <strong>Due:</strong>{" "}
@@ -277,7 +287,7 @@ function TaskPage() {
                   </div>
                 </div>
               ))}
-            </>
+            </div>
           ) : (
             // conditional feedback: if there are no existing projs return comment
             <p>No Tasks Created.</p>

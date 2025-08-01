@@ -236,7 +236,7 @@ function ProjectPage() {
               {/* iterate over each proj in projs */}
               {projs.map((proj) => (
                 <div key={proj._id} className="proj-display-card">
-                  <div proj-card-main>
+                  <div className="proj-card-main">
                     <div className="proj-display-des">
                       <h3>{proj.name}</h3>
                       <p>{proj.description}</p>

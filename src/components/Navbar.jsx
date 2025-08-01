@@ -4,7 +4,10 @@ import { useUser } from "../context/UserContext";
 
 function NavBar() {
   // destructured assignments to extra the specific values for the currentUser & logout function
-  const { currentUser, logout } = useUser();
+  const { currentUser, logout, loading } = useUser();
+  if (loading) {
+    return <div className="nav-bar">Loading...</div>
+  }
 
   return (
     <nav className="flex gap-5 mx-auto">
@@ -16,7 +19,7 @@ function NavBar() {
 
       {/* conditional rendering for navbar configuration */}
       {currentUser ? (
-        <div className="nav-bar flex gap-5 mx-auto">
+        <div className="nav-bar">
           <span className="greet">{currentUser?.username}, Hello There!</span>
           <NavLink to="*">User Dashboard</NavLink>
           <NavLink to="/">Home</NavLink>
@@ -36,7 +39,7 @@ function NavBar() {
           </button>
         </div>
       ) : (
-        <div className="flex gap-5 mx-auto">
+        <div className="nav-bar">
           <NavLink to="/">Home</NavLink>
           <NavLink to="/about">About</NavLink>
           <NavLink to="/signin">Login</NavLink>

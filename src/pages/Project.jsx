@@ -253,7 +253,7 @@ function ProjectPage() {
                     {/* triggers navigation over to task page to create tasks */}
                     <button
                       style={{ background: "none" }}
-                      onClick={() => handleTask(proj._id)}
+                      onClick={() => handleTask({}, proj._id)}
                     >
                       <i className="ri-function-add-fill pr-1"></i>
                       Add Task

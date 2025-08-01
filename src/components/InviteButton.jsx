@@ -9,7 +9,7 @@ function InviteButton({ disabled = true }) {
         disabled={disabled ? disabled : false}
         style={{background: 'none'}}
       >
-        <i class="ri-user-add-line mr-1"></i>
+        <i className="ri-user-add-line mr-1"></i>
         Invite
       </button>
     </>

@@ -1,22 +1,33 @@
 // image carousel for home/front page
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../css/carousel.css";
 import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from "react-icons/bs";
 
-function Carousel({ data }) {
+function Carousel({ data, autoSlide = true, interval = 3000 }) {
   const [slide, setSlide] = useState(0);
   console.log(data);
 
   const prevSlide = () => {
-    setSlide(slide === 0 ? data.length -1 : slide -1)
-  }
+    setSlide(slide === 0 ? data.length - 1 : slide - 1);
+  };
   const nextSlide = () => {
-    setSlide(slide === data.length -1 ? 0 : slide +1)
-  }
+    setSlide(slide === data.length - 1 ? 0 : slide + 1);
+  };
+
+  // auto-slide show effect
+  useEffect(() => {
+    if(!autoSlide) return;
+
+    const slideInterval = setInterval(() => {
+        nextSlide();
+    }, interval);
+
+    return () => clearInterval(slideInterval);
+  }, [slide, autoSlide, interval]);
 
   return (
     <div className="carousel">
-      <BsArrowLeftCircleFill className="arrow arrow-left" onClick={prevSlide}/>
+      <BsArrowLeftCircleFill className="arrow arrow-left" onClick={prevSlide} />
       {data.map((item, idx) => {
         return (
           <img
@@ -27,7 +38,10 @@ function Carousel({ data }) {
           />
         );
       })}
-      <BsArrowRightCircleFill className="arrow arrow-right" onClick={nextSlide}/>
+      <BsArrowRightCircleFill
+        className="arrow arrow-right"
+        onClick={nextSlide}
+      />
       <span className="indicators">
         {data.map((_, idx) => {
           return (

@@ -14,9 +14,34 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgba(237, 244, 247, 0.803);
+  background-color: rgba(237, 244, 247, 0.804);
 }
 
+/* navbar styling */
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1.5rem 1rem;
+  padding: 1rem 2rem;
+}
+.navbar {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+.navbar span,
+.navbar a {
+  font-size: 1rem;
+  text-decoration: none;
+  color: rgb(27, 24, 162);
+}
+.logout-btn:hover {
+  color: rgb(222, 7, 7, 0.861);
+  cursor: pointer;
+}
+
+/* home page styling */
 .home-page {
   display: flex;
   flex-direction: column;

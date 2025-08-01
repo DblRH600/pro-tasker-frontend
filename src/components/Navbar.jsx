@@ -10,7 +10,7 @@ function NavBar() {
   }
 
   return (
-    <nav className="flex gap-5 mx-auto">
+    <nav className="navbar-container flex gap-5 mx-auto">
       <div className="nav-bar flex gap-5 mx-auto">
         {/* <NavLink to="/">Home</NavLink> */}
         {/* <NavLink to="/about">About</NavLink> */}
@@ -19,7 +19,7 @@ function NavBar() {
 
       {/* conditional rendering for navbar configuration */}
       {currentUser ? (
-        <div className="nav-bar">
+        <div className="navbar">
           <span className="greet">{currentUser?.username}, Hello There!</span>
           <NavLink to="*">User Dashboard</NavLink>
           <NavLink to="/">Home</NavLink>
@@ -30,7 +30,7 @@ function NavBar() {
             <i className="ri-settings-5-line"></i>
           </NavLink>
           <button
-            className="logout"
+            className="logout-btn"
             onClick={logout}
             style={{ background: "none" }}
           >
@@ -39,7 +39,7 @@ function NavBar() {
           </button>
         </div>
       ) : (
-        <div className="nav-bar">
+        <div className="navbar">
           <NavLink to="/">Home</NavLink>
           <NavLink to="/about">About</NavLink>
           <NavLink to="/signin">Login</NavLink>

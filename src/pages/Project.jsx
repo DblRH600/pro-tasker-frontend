@@ -75,6 +75,29 @@ function ProjectPage() {
     }
   };
 
+  // handle delete button clicks
+  const handProjDelete = async (projectId) => {
+    const confirmDelete = window.confirm(
+      "Are you positive you want to delete this project?"
+    );
+    if (!confirmDelete) return;
+
+    try {
+      await backendClient.delete(`/projects/${projectId}`, {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(
+            localStorage.getItem("pt-token")
+          )}`,
+        },
+      });
+
+      // remove deleted proj from state
+      setProjs((prev) => prev.filter((proj) => proj._id !== projectId))
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   // handle form submission -- sends data to backend
   const handleSubmit = async (e) => {
     // prevent default browser behavior
@@ -258,7 +281,13 @@ function ProjectPage() {
                       <i className="ri-function-add-fill pr-1"></i>
                       Add Task
                     </button>
-                    
+                    <button
+                      style={{ background: "none" }}
+                      onClick={() => handProjDelete(proj._id)}
+                    >
+                      <i className="ri-delete-bin-3-line"></i>
+                      Delete
+                    </button>
                   </div>
 
                   <div>

@@ -40,16 +40,17 @@ function RegistrationPage() {
     }
   };
   return (
-    <main>
+    <main className="create-acc-container" id="create-acc-container">
       {/* <HomeButton /> */}
-      <h1>Create Account</h1>
+      <h1 className="create-acc-header">Create Account</h1>
 
       <form
-        className="flex flex-col my-3 gap-2 items-center"
+        className="create-acc-form flex flex-col my-3 gap-2 items-center"
+        id="create-acc-form"
         onSubmit={handleSubmit}
       >
-        <h2>Please fill out the form below to create an account</h2>
-        <label htmlFor="username" />
+        <h2 className="create-acc-text">Please fill out the form below to create an account</h2>
+        <label htmlFor="username"/>
         {/* controlled data input that maps formData */}
         <input
           type="text"
@@ -75,15 +76,16 @@ function RegistrationPage() {
           onChange={handleChange}
         />
 
-        <input type="submit" value="Create Account" />
+        <input type="submit" value="Create Account" id="login-btn" />
       </form>
 
       {/* custom button to redirect to sign in page from create account page */}
-      <p>
+      <p className="create-acc-quest">
         Already have an account?{" "}
         <button
           onClick={() => navigate("/signin")}
           style={{ background: "none" }}
+          className="signin-create-btn"
         >
           LogIn
         </button>

@@ -16,6 +16,7 @@ function ProjectPage() {
   const [projStatus, setProjStatus] = useState("Discovery");
   const [editProj, setEditProj] = useState(false);
   const [editProjId, setEditProjId] = useState(null);
+  const [showTasks, setShowTasks] = useState(false);
 
   // used to authenticate token & fetch existing projs from DB
   useEffect(() => {
@@ -92,7 +93,7 @@ function ProjectPage() {
       });
 
       // remove deleted proj from state
-      setProjs((prev) => prev.filter((proj) => proj._id !== projectId))
+      setProjs((prev) => prev.filter((proj) => proj._id !== projectId));
     } catch (error) {
       console.error(error);
     }
@@ -170,12 +171,13 @@ function ProjectPage() {
   return (
     <>
       <div className="proj-container">
-        <div className="proj-header">
-          <h1>Project Details</h1>
+        <div className="proj-header-container">
+          <h1 className="proj-header">Project Details</h1>
         </div>
 
         <form
           className="proj-details flex flex-col my-5 gap-2 items-center"
+          id="proj-details"
           onSubmit={handleSubmit}
         >
           <label htmlFor="name" />
@@ -187,19 +189,21 @@ function ProjectPage() {
             onChange={(e) => setName(e.target.value)}
           />
           <label htmlFor="description" />
-          <input
+          <textarea
+            className="proj-des"
             type="text"
             name="description"
             value={description}
             placeholder="Project Description"
             onChange={(e) => setDescription(e.target.value)}
           />
-          <div>
+          <div className="proj-stats">
             <label htmlFor="status" />
             <select
               name="status"
               value={projStatus}
               onChange={(e) => setProjStatus(e.target.value)}
+              className="proj-sel"
             >
               <option value="Discovery">Discovery</option>
               <option value="In Progress">In Progress</option>
@@ -207,121 +211,138 @@ function ProjectPage() {
             </select>
             <label htmlFor="dueDate" />
             <input
+              id="proj-date"
               type="date"
               name="dueDate"
               value={projDueDate}
               onChange={(e) => setProjDueDate(e.target.value)}
             />
+            <input
+              type="submit"
+              value={editProj ? "Update Project" : "Create Project"}
+              id="proj-submit-btn"
+            />
           </div>
-
-          <input
-            type="submit"
-            value={editProj ? "Update Project" : "Create Project"}
-          />
         </form>
         <hr />
 
-        <div className="proj-display">
+        <div className="proj-display-container">
+          <div className="proj-display-header">
+            <h2>Projects</h2>
+          </div>
           {/* Array.isArray used to validate proj arrays before it can render */}
           {Array.isArray(projs) && projs.length > 0 ? (
-            <>
-              <h2>Projects</h2>
+            <div className="proj-display">
               {/* iterate over each proj in projs */}
               {projs.map((proj) => (
-                <div key={proj._id}>
-                  <div>
-                    <h3>{proj.name}</h3>
-                    <p>{proj.description}</p>
-                    {/* display readable date in easy to read format if date exists */}
-                    {proj.createdAt && (
-                      <p>
-                        <strong>Created:</strong>{" "}
-                        {new Date(proj.createdAt).toLocaleDateString()}
-                      </p>
-                    )}
-                  </div>
-                  <div>
-                    {/* display detail proj info */}
-                    {proj.projectDueDate && (
-                      <p>
-                        <strong>Due:</strong>{" "}
-                        {new Date(proj.projectDueDate).toLocaleDateString()}
-                      </p>
-                    )}
-                    {proj.status && (
-                      <p>
-                        <strong>Status:</strong> {proj.status}
-                      </p>
-                    )}
-                  </div>
+                <div key={proj._id} className="proj-display-card">
+                  <div proj-card-main>
+                    <div className="proj-display-des">
+                      <h3>{proj.name}</h3>
+                      <p>{proj.description}</p>
+                    </div>
+                    <div className="proj-display-stats">
+                      {/* display detail proj info */}
+                      {/* display readable date in easy to read format if date exists */}
+                      {proj.createdAt && (
+                        <p>
+                          <strong>Created:</strong>{" "}
+                          {new Date(proj.createdAt).toLocaleDateString()}
+                        </p>
+                      )}
+                      {proj.projectDueDate && (
+                        <p>
+                          <strong>Due:</strong>{" "}
+                          {new Date(proj.projectDueDate).toLocaleDateString()}
+                        </p>
+                      )}
+                      {proj.status && (
+                        <p>
+                          <strong>Status:</strong> {proj.status}
+                        </p>
+                      )}
+                      {proj.user && (
+                        <p>
+                          <strong>Project Owner:</strong>{" "}
+                          {typeof proj.user === "object"
+                            ? proj.user.username
+                            : proj.user}
+                        </p>
+                      )}
+                    </div>
+                    <div className="proj-display-btn-container">
+                      {/* triggers handleProjEdit logic: change proj in & out of edit mode */}
+                      <InviteButton className="invite-btn" />
+                      <button
+                        onClick={() => handleProjEdit(proj)}
+                        style={{ background: "none" }}
+                        id="proj-edit-btn"
+                      >
+                        <i className="ri-pencil-ruler-2-line"></i>
+                        {editProj && editProjId === proj._id
+                          ? "Cancel"
+                          : "Edit"}
+                      </button>
+                      {/* triggers navigation over to task page to create tasks */}
+                      <button
+                        style={{ background: "none" }}
+                        onClick={() => handleTask({}, proj._id)}
+                        className="add-btn"
+                      >
+                        <i className="ri-function-add-fill pr-1"></i>
+                        Add Task
+                      </button>
+                      <button
+                        style={{ background: "none" }}
+                        onClick={() => handProjDelete(proj._id)}
+                        id="proj-delete-btn"
+                      >
+                        <i className="ri-delete-bin-3-line"></i>
+                        Delete
+                      </button>
+                    </div>
+                    <hr />
+                    <div className="proj-task-container">
 
-                  {proj.user && (
-                    <p>
-                      <strong>Project Owner:</strong>{" "}
-                      {typeof proj.user === "object"
-                        ? proj.user.username
-                        : proj.user}
-                    </p>
-                  )}
-                  <div>
-                    {/* triggers handleProjEdit logic: change proj in & out of edit mode */}
-                    <InviteButton />
-                    <button
-                      onClick={() => handleProjEdit(proj)}
-                      style={{ background: "none" }}
-                    >
-                      <i className="ri-pencil-ruler-2-line"></i>
-                      {editProj && editProjId === proj._id ? "Cancel" : "Edit"}
-                    </button>
-                    {/* triggers navigation over to task page to create tasks */}
-                    <button
-                      style={{ background: "none" }}
-                      onClick={() => handleTask({}, proj._id)}
-                    >
-                      <i className="ri-function-add-fill pr-1"></i>
-                      Add Task
-                    </button>
-                    <button
-                      style={{ background: "none" }}
-                      onClick={() => handProjDelete(proj._id)}
-                    >
-                      <i className="ri-delete-bin-3-line"></i>
-                      Delete
-                    </button>
-                  </div>
-
-                  <div>
-                    {/* checks for task array w/ optional chaining to minimize runtime errors  */}
-                    {proj.tasks?.length > 0 && (
-                      <div>
-                        <h4>Tasks:</h4>
-                        <ul>
-                          {/* map (iterate) over each array & return each task array*/}
-                          {proj.tasks.map((task) => (
-                            <li
-                              key={task._id}
-                              onClick={() => handleTask(task, proj._id)}
-                            >
-                              <strong>{task.title}</strong> - {task.status}
-                              {task.taskDueDate && (
-                                <>
-                                  {" "}
-                                  (Due:{" "}
-                                  {new Date(
-                                    task.taskDueDate
-                                  ).toLocaleDateString()}
-                                  )
-                                </>
-                              )}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
+                      {/* checks for task array w/ optional chaining to minimize runtime errors  */}
+                      {proj.tasks?.length > 0 && (
+                        <div className="proj-tasks-info">
+                          <h4><button
+                            className="toggle-task-view"
+                            onClick={() => setShowTasks(!showTasks)}
+                          >
+                            {showTasks ? "Hide Tasks" : "Show Tasks"}
+                          </button></h4>
+                          {showTasks && (
+                            <ul>
+                              {/* map (iterate) over each array & return each task array*/}
+                              {proj.tasks.map((task) => (
+                                <li
+                                  key={task._id}
+                                  onClick={() => handleTask(task, proj._id)}
+                                >
+                                  <strong>{task.title}</strong> - {task.status}
+                                  {task.taskDueDate && (
+                                    <>
+                                      {" "}
+                                      (Due:{" "}
+                                      {new Date(
+                                        task.taskDueDate
+                                      ).toLocaleDateString()}
+                                      )
+                                    </>
+                                  )}
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
               ))}
-            </>
+            </div>
           ) : (
             // conditional feedback: if there are no existing projs return comment
             <p>No projects yet.</p>

@@ -82,7 +82,8 @@ input {
 }
 
 /* log in & create account styling */
-.signin-container {
+.signin-container,
+.create-acc-container {
   display: flex;
   flex-direction: column;
   margin: 1rem 2rem 5rem 1rem;
@@ -94,12 +95,14 @@ input {
   align-items: center;
   background-color: rgba(222, 7, 7, 0.562);
 }
-.signin-header {
+.signin-header,
+.create-acc-header {
   margin-bottom: 1rem;
   margin-top: -2rem;
   font-size: 3.5rem;
 }
-.signin-form {
+.signin-form,
+.create-acc-form {
   border: 0.5px solid #777;
   border-radius: 7px;
   padding: 2rem;
@@ -112,13 +115,18 @@ input {
   color: red;
   font-style: italic;
 }
-.signin-quest {
-  font-size: 1rem;
+.signin-quest,
+.create-acc-quest {
+  font-size: 1.25rem;
   font-weight: bold;
 }
 .signin-create-btn:hover {
   cursor: pointer;
   color: rgb(27, 24, 162);
+}
+#login-btn {
+  background-color: rgb(130, 240, 136);
+  font-weight: bold;
 }
 #login-btn:hover {
   background-color: rgba(26, 24, 162, 0.788);
@@ -126,6 +134,172 @@ input {
   font-weight: bold;
   cursor: pointer;
 }
+#create-acc-container {
+  background-color: rgba(248, 231, 48, 0.653);
+}
+
+/* projects page */
+.proj-container {
+  display: flex;
+  flex-direction: column;
+  margin: 0rem 3rem;
+  padding: 0.75rem;
+  gap: 0.75rem;
+}
+.proj-header-container {
+  background-color: rgb(222, 7, 7, 0.861);
+  width: 100%;
+  padding: 7px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 5px 8px #444;
+}
+.proj-header {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #fff;
+}
+.proj-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #555;
+  border-radius: 20px;
+  margin: 1rem 6rem;
+  padding: 1rem 2rem 2rem 2rem;
+  box-shadow: 0 0 10px #555;
+  background-color: rgba(248, 231, 48, 0.653);
+}
+.proj-stats {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+.proj-sel {
+  border: 2px solid #444;
+  border-radius: 5px;
+  padding: 8px 12px;
+  background-color: #fff;
+}
+.proj-des {
+  width: 100%;
+  height: 75px;
+  padding: 12px 20px;
+  border: 2px solid #444;
+  border-radius: 8px;
+  background-color: #fff;
+  font-size: 1rem;
+  resize: none;
+}
+#proj-submit-btn {
+  background-color: aqua;
+  font-weight: bold;
+}
+#proj-submit-btn:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+/* pojects page -- displayed content */
+.proj-display-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  justify-content: center;
+  align-items: center;
+}
+.proj-display-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(222, 7, 7, 0.861);
+  width: 80%;
+  padding: 7px;
+  border-radius: 8px;
+  box-shadow: 0 5px 8px #444;
+}
+.proj-display-header h2 {
+  font-size: 1.25rem;
+}
+.proj-display-des h3 {
+  font-weight: bold;
+  font-size: 1.3rem;
+  text-decoration: underline;
+  font-style: italic;
+}
+.proj-display-card {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "header meta"
+    "actions actions"
+    "tasks tasks";
+  gap: 1rem;
+  padding: 1.5rem;
+  margin: 1rem 0;
+  border: 1px solid #999;
+  border-radius: 8px;
+  background-color: #e0f4ff;
+  box-shadow: 0 5px 8px #444;
+}
+/* grid assignments */
+.proj-display-des {
+  grid-area: header;
+}
+.proj-display-stats {
+  grid-area: meta;
+}
+.proj-display-btn-container {
+  grid-area: actions;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.proj-task-container {
+  grid-area: tasks;
+}
+.proj-display-btn-container button {
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  font-size: 17px;
+  margin-bottom: 5px;
+}
+.proj-display-btn-container button:hover {
+  color: rgba(26, 24, 162, 0.788);
+}
+#proj-delete-btn:hover {
+  color: red;
+}
+#proj-edit-btn:hover {
+  color: goldenrod;
+}
+/* projects page -- tasks */
+.proj-task-container {
+  padding-left: 1.2rem;
+  padding-top: 0.75rem;
+}
+.toggle-task-view {
+  background: none;
+  border: 1px solid rgba(26, 24, 162, 0.788);
+  border-radius: 4px;
+  color: rgba(26, 24, 162, 0.788);
+  padding: 0.5rem 0.8rem;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+.toggle-task-view:hover {
+  background-color: rgba(26, 24, 162, 0.788);
+  color: white;
+}
+.proj-tasks-info li:hover {
+  color: rgb(222, 7, 7, 0.861);
+}
+
+/* tasks page -- additional */
+
 
 /* footer styling */
 .footer {

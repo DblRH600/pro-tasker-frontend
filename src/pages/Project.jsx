@@ -148,7 +148,6 @@ function ProjectPage() {
     <>
       <div className="proj-container">
         <div className="proj-header">
-          <InviteButton />
           <h1>Project Details</h1>
         </div>
 
@@ -243,6 +242,7 @@ function ProjectPage() {
                   )}
                   <div>
                     {/* triggers handleProjEdit logic: change proj in & out of edit mode */}
+                    <InviteButton />
                     <button
                       onClick={() => handleProjEdit(proj)}
                       style={{ background: "none" }}
@@ -258,6 +258,7 @@ function ProjectPage() {
                       <i className="ri-function-add-fill pr-1"></i>
                       Add Task
                     </button>
+                    
                   </div>
 
                   <div>

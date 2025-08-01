@@ -39,15 +39,6 @@ export const UserProvider = ({ children }) => {
       const token = JSON.parse(localStorage.getItem("pt-token"));
       console.log(token, "from userContext");
 
-      // skip fetch if no token is found
-      if (token) {
-        backendClient.get("/projects", {
-            headers: {
-                Authorization: `Bearer ${JSON.parse(localStorage.getItem("pt-token"))}`,
-            }
-        }).then((res) => {setCurrentUser(res.data)})
-      }
-
       // try / catch block to safely handle fetch request
       try {
         const res = await fetch(`${backendClient}`, {

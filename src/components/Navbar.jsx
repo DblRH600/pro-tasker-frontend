@@ -18,7 +18,7 @@ function NavBar() {
       {currentUser ? (
         <div className="nav-bar flex gap-5 mx-auto">
           <span className="greet">{currentUser?.username}, Hello There!</span>
-          <NavLink to="/landing">User Dashboard</NavLink>
+          <NavLink to="*">User Dashboard</NavLink>
           <NavLink to="/">Home</NavLink>
           <NavLink to="/projects">Projects</NavLink>
           {/* <NavLink to="/tasks">Tasks</NavLink> */}

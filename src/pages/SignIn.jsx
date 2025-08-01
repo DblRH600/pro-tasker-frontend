@@ -40,8 +40,9 @@ function SignInPage() {
       // store user object to enable session management
       setCurrentUser(res.data.user);
 
-      // route to 'User Dashboard' upon successful login
-      navigate("/landing");
+      // will eventually route to 'User Dashboard' upon successful login
+      // for now route to projects page
+      navigate("/projects");
     } catch (error) {
       console.log(error);
 

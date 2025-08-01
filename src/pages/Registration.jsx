@@ -34,7 +34,7 @@ function RegistrationPage() {
       localStorage.setItem("pt-token", JSON.stringify(res.data.token));
 
       // route to 'User Dashboard' upon successful account creation
-      navigate("/landing");
+      navigate("/projects");
     } catch (error) {
       console.log(error);
     }

@@ -1,4 +1,5 @@
 // image carousel for home/front page
+// credit to "Code Complete" & "Johan Alves" for their tutorials how to setup the carousel
 import { useState, useEffect } from "react";
 import "../css/carousel.css";
 import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from "react-icons/bs";

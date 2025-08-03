@@ -26,24 +26,78 @@ input {
   background-color: #fff;
 }
 
-/* navbar styling */
+/* navbar styling --updated for responsive layout*/
 .navbar-container {
+  width: 100%;
+  position: relative;
+  z-index: 10;
+  padding: 1rem 2rem;
+}
+.nav-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 1.5rem 1rem;
-  padding: 1rem 2rem;
+  gap: 3rem;
+}
+.greet {
+  font-size: 1rem;
+  font-weight: bold;
+  color: rgb(27, 24, 162);
 }
 .navbar {
   display: flex;
   gap: 1.5rem;
   align-items: center;
 }
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
 .navbar span,
 .navbar a {
   font-size: 1rem;
   text-decoration: none;
   color: rgb(27, 24, 162);
+}
+.desktop-nav {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+.menu-toggle {
+  font-size: 1.8rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: none;
+}
+.mobile-nav .navbar {
+  position: absolute;
+  top: 100%;
+  left: 5%;
+  right: 5%;
+  background: rgba(237, 244, 247);
+  color: rgb(245, 245, 245);
+  border-radius: 16px;
+  padding: 2rem;
+  margin: 0 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 15px 15px rgb(222, 7, 7, 0.4);
+}
+.mobile-nav a {
+  color: rgb(27, 24, 162);
+  text-decoration: none;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+.mobile-nav a:hover {
+  color: rgba(65, 63, 161, 0.881);
 }
 .logout-btn:hover {
   color: rgb(222, 7, 7, 0.861);
@@ -354,3 +408,123 @@ input {
 }
 
 /* media queries */
+@media (max-width: 480px) {
+  
+  .signin-header,
+  .create-acc-header {
+    font-size: 2rem;
+  }
+
+  .signin-quest,
+  .create-acc-quest {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  .proj-header,
+  .task-header {
+    font-size: 1.5rem;
+  }
+
+  .proj-display-card,
+  .task-display-card {
+    grid-template-areas:
+      "header"
+      "meta"
+      "actions"
+      "tasks";
+  }
+
+  .navbar-container {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .navbar {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .footer {
+    font-size: 0.65rem;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .desktop-nav {
+    display: none;
+  }
+  .menu-toggle {
+    display: block;
+  }
+  .navbar-container {
+    flex-direction: column;
+    align-items: start;
+  }
+  .greet {
+    font-size: 0.95rem;
+  }
+
+  
+  .home-page-header,
+  .home-text-container {
+    width: 90vw;
+    padding: 1rem;
+    flex-direction: column;
+  }
+  .home-header {
+    font-size: 2rem;
+  }
+  .home-text {
+    font-size: 1.1rem;
+  }
+
+  .proj-details,
+  .task-details {
+    padding: 1rem;
+    margin: 1rem;
+  }
+  .proj-stats,
+  .text-stats {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  .proj-display-btn-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .proj-display-header,
+  .task-display-header {
+    width: 95%;
+  }
+  .proj-display-card,
+  .task-display-card {
+    padding: 1rem;
+  }
+  input,
+  textarea,
+  select {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 1024px) {
+
+  .signin-container,
+  .create-acc-container {
+    width: 90%;
+    padding: 2rem;
+  }
+  .signin-header,
+  .create-acc-header {
+    font-size: 2.5rem;
+  }
+
+  .proj-details,
+  .task-details {
+    margin: 1rem 1rem;
+  }
+
+}

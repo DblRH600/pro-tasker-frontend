@@ -356,7 +356,7 @@ return (
 
 - [Blog: How to use React Context effectively](https://kentcdodds.com/blog/how-to-use-react-context-effectively) - A blog by Kent Dodds on how to create and use React Context effectively.
 
-- [YouTube: Code Complete: Make an Image Carousel](https://www.youtube.com/watch?app=desktop&v=QpsGo8kZiTo)
+- [YouTube: Code Complete: Make an Image Carousel](https://www.youtube.com/watch?app=desktop&v=QpsGo8kZiTo) - youtube tutorial for creating custom image carousel / slide show
 
 ## Acknowledgments
 

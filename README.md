@@ -179,7 +179,7 @@ npm i tailwindcss @tailwindcss/vite
  - Dynamic routing implementation
  
 ## Code Snipets
-```jsx navbar
+```jsx
 return (
     <nav className="navbar-container">
       {/* top bar for mobile view should always show logout and greeting when logged in */}
@@ -268,7 +268,7 @@ return (
   );
 ```
 
-```jsx Project
+```jsx
 // handle form submission -- sends data to backend
   const handleSubmit = async (e) => {
     // prevent default browser behavior

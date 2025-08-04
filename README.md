@@ -179,13 +179,164 @@ npm i tailwindcss @tailwindcss/vite
  - Dynamic routing implementation
  
 ## Code Snipets
-```jsx
+```jsx navbar
+return (
+    <nav className="navbar-container">
+      {/* top bar for mobile view should always show logout and greeting when logged in */}
+      <div className="nav-top">
+        <span className="greet">
+          {currentUser ? `${currentUser?.username}, Hello There!` : ""}
+        </span>
+
+        <div className="navbar-actions">
+          {currentUser && (
+            <button
+              className="logout-btn"
+              onClick={logout}
+              style={{ background: "none" }}
+            >
+              <i className="ri-logout-circle-r-line"></i>
+              Log Out
+            </button>
+          )}
+
+          {/* hamburger */}
+          <div
+            className="menu-toggle"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? (
+              <button>
+                <i className="ri-close-line"></i>
+              </button>
+            ) : (
+              <button>
+                <i className="ri-align-justify"></i>
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <div className="navbar desktop-nav">
+        {/* conditional rendering for navbar configuration */}
+        {currentUser ? (
+          <div className="navbar">
+            <NavLink to="*">User Dashboard</NavLink>
+            <NavLink to="/">Home</NavLink>
+            <NavLink to="/projects">Projects</NavLink>
+            {/* <NavLink to="/tasks">Tasks</NavLink> */}
+            <NavLink to="/about">About</NavLink>
+            <NavLink to="*">
+              <i className="ri-settings-5-line"></i>
+            </NavLink>
+          </div>
+        ) : (
+          <div className="navbar">
+            <NavLink to="/">Home</NavLink>
+            <NavLink to="/about">About</NavLink>
+            <NavLink to="/signin">Login</NavLink>
+          </div>
+        )}
+      </div>
+
+      {/* mobile nav */}
+      {isMenuOpen && (
+        <div className="mobile-nav">
+          {currentUser ? (
+            // onClick function set for each NavLink in mobile menu to help control responsiveness & precision
+          <div className="navbar">
+            <NavLink to="*" onClick={() => setIsMenuOpen(false)}>User Dashboard</NavLink>
+            <NavLink to="/" onClick={() => setIsMenuOpen(false)}>Home</NavLink>
+            <NavLink to="/projects" onClick={() => setIsMenuOpen(false)}>Projects</NavLink>
+            {/* <NavLink to="/tasks">Tasks</NavLink> */}
+            <NavLink to="/about" onClick={() => setIsMenuOpen(false)}>About</NavLink>
+            <NavLink to="*" onClick={() => setIsMenuOpen(false)}>
+              <i className="ri-settings-5-line"></i>
+            </NavLink>
+          </div>
+        ) : (
+          <div className="navbar">
+            <NavLink to="/" onClick={() => setIsMenuOpen(false)}>Home</NavLink>
+            <NavLink to="/about" onClick={() => setIsMenuOpen(false)}>About</NavLink>
+            <NavLink to="/signin" onClick={() => setIsMenuOpen(false)}>Login</NavLink>
+          </div>
+        )}
+        </div>
+      )}
+    </nav>
+  );
 ```
 
-```jsx
-```
+```jsx Project
+// handle form submission -- sends data to backend
+  const handleSubmit = async (e) => {
+    // prevent default browser behavior
+    e.preventDefault();
 
-```jsx
+    // try / catch w/ condition branching for create|edit modes
+    try {
+      if (editProj && editProjId) {
+        // if edit mode, send put request so state values can be updated & sent to backend
+        const res = await backendClient.put(
+          `/projects/${editProjId}`,
+          {
+            name,
+            description,
+            projectDueDate: projDueDate,
+            status: projStatus,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${JSON.parse(
+                localStorage.getItem("pt-token")
+              )}`,
+            },
+          }
+        );
+
+        // update local proj array(s) displayed with updated branch
+        setProjs((prev) =>
+          prev.map((proj) => (proj._id === editProjId ? res.data : proj))
+        );
+
+        // cancel edit mode and clear form
+        setEditProj(false);
+        setEditProjId(null);
+      } else {
+        // if create mode, send post request to add state values to backend and create project
+        const res = await backendClient.post(
+          "/projects",
+          {
+            name,
+            description,
+            projectDueDate: projDueDate,
+            status: projStatus,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${JSON.parse(
+                localStorage.getItem("pt-token")
+              )}`,
+            },
+          }
+        );
+
+        console.log(res);
+
+        // add new proj array to rendered list for display
+        setProjs((prev) => [...prev, res.data]);
+      }
+
+      // clear form after successful submission
+      setName("");
+      setDescription("");
+      setProjDueDate("");
+      setProjStatus("Discovery");
+    } catch (error) {
+      console.error(error);
+    }
+  };
 ```
 
 ## Future Updates

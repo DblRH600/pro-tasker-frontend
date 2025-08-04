@@ -169,7 +169,31 @@ npm i tailwindcss @tailwindcss/vite
   - Login and registration utilizing _hashed_ passwords
   - JWT-based secure sessions
 
+- **UI Features**
+  - Responsive design optimized for various devices
+  - Reusuable component library
 
+- **Navigation and Routing**
+ - Client side routing via react-router-dom for seamless experience
+ - Redirects and route guards ti support authentication
+ - Dynamic routing implementation
+ 
+## Code Snipets
+```jsx
+```
+
+```jsx
+```
+
+```jsx
+```
+
+## Future Updates
+
+1. Implement a colaboration feature
+2. Develop a user dashboard for user to see projects they own or tasks they own on other projects
+3. Develop user profile page
+4. Allow for more robust data collection to track all necessary / key features for project
 
 ## Useful resources
 
@@ -177,7 +201,9 @@ npm i tailwindcss @tailwindcss/vite
 
 - [Documentation: tailwindcss](https://tailwindcss.com/docs/installation/using-vite) - ***tailwindscss*** was useful in helping to style the project.
 
-- [Blog: How to use React Context effectively](https://kentcdodds.com/blog/how-to-use-react-context-effectively) - A blog by Kent Dodds on how to create and use React Context effectively
+- [GitHub: Remix-Design](https://github.com/Remix-Design/RemixIcon?tab=readme-ov-file) - ***github*** repo with instructions and links for how to utilize icons in react.
+
+- [Blog: How to use React Context effectively](https://kentcdodds.com/blog/how-to-use-react-context-effectively) - A blog by Kent Dodds on how to create and use React Context effectively.
 
 - [YouTube: Code Complete: Make an Image Carousel](https://www.youtube.com/watch?app=desktop&v=QpsGo8kZiTo)
 
